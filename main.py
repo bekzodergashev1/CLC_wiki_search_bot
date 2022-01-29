@@ -1,16 +1,20 @@
+import logging
 from telegram.ext import Updater, CommandHandler, CallbackContext, MessageHandler
 from telegram.update import Update
 from telegram.ext.filters import Filters
 import requests
-import settings
+import settings.local_settings as settings
 
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.DEBUG)
 
 updater = Updater(token=settings.TELEGRAM_TOKEN)
 
 
 def start(update: Update, context: CallbackContext):
     update.message.reply_text('Salom')
-    context.bot.send_message(chat_id=update.message.chat_id, text='Assalomu alaykum! \n'
+    context.bot.send_message(chat_id=update.message.id, text='Assalomu alaykum! \n'
                                                                   'Wikipediya botiga xuh kelibsiz!\n'
                                                                   'Izlash uchun /search Amir temur')
 
